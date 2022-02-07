@@ -1,0 +1,23 @@
+NAME = minishell
+SRCS =	srcs/exec/main.c \
+
+HEADER = minishell.h
+OBJS = ${SRCS:.c=.o}
+
+all: $(NAME)
+
+libft/libft.a:
+	make -C ./libft
+
+$(NAME): $(SRCS) libft/libft.a
+	gcc -Wall -Wextra -Werror $(SRCS) libft/libft.a -I include -o minishell
+
+clean:
+	$(MAKE) -C ./libft clean
+	rm -rf $(OBJS)
+
+fclean: clean
+	$(MAKE) -C ./libft fclean
+	rm -f $(NAME)
+
+re: fclean all
