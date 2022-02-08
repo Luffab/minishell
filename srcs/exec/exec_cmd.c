@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/07 13:08:39 by luffab            #+#    #+#             */
-/*   Updated: 2022/02/08 16:12:22 by fatilly          ###   ########lyon.fr   */
+/*   Created: 2022/02/08 15:43:31 by fatilly           #+#    #+#             */
+/*   Updated: 2022/02/08 16:01:54 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
-# include <stdint.h>
-# include <fcntl.h>
-# include <string.h>
-# include <sys/wait.h>
-# include <signal.h>
-# include <stdbool.h>
-# include <linux/limits.h>
-# include <pwd.h>
-# include <sys/types.h>
-# include "../libft/libft.h"
+void    exec_cmd(char **cmd)
+{
+	pid_t	pid = 0;
+	int		status = 0;
 
-#define BUFFER_SIZE 32
-
-#endif
+	pid = fork();
+	if (pid == -1)
+		perror("fork");
+	else if (pid > 0)
+    {
+		waitpid(pid, &status, 0);
+		kill(pid, SIGTERM);
+	}
+    else
+    {
+		if (execve(cmd[0], cmd, NULL) == -1)
+			perror("shell");
+		exit(EXIT_FAILURE);
+	}
+}

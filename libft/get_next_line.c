@@ -35,7 +35,7 @@ int		get_next_line(int fd, char **line)
 	char		buf[BUFFER_SIZE + 1];
 
 	ret = BUFFER_SIZE;
-	if (BUFFER_SIZE < 1 || line == NULL || read(fd, buf, 0) < 0)
+	if (line == NULL || read(fd, buf, 0) < 0)
 		return (-1);
 	while (!(ft_strchr(str, '\n')) && ret > 0)
 	{

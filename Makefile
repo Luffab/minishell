@@ -1,5 +1,7 @@
 NAME = minishell
 SRCS =	srcs/exec/main.c \
+		srcs/exec/exec_cmd.c \
+		srcs/exec/built_in.c \
 
 HEADER = minishell.h
 OBJS = ${SRCS:.c=.o}

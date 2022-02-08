@@ -20,6 +20,8 @@ char	*ft_strchr(const char *s, int c)
 
 	i = 0;
 	s1 = (char *)s;
+	if (!s1)
+		return (NULL);
 	while (s1[i])
 	{
 		if (s1[i] == c)
