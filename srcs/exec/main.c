@@ -6,7 +6,7 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 12:56:49 by luffab            #+#    #+#             */
-/*   Updated: 2022/02/08 15:45:46 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 15:16:36 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	minishell_loop(void)
 	while (ret > 0)
 	{
 		ret = get_next_line(0, &line);
-		//execution principale
 		ft_putstr_fd("$> ", 1);
 	}
 	printf("Bye \n");

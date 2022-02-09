@@ -6,7 +6,7 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 16:01:32 by fatilly           #+#    #+#             */
-/*   Updated: 2022/02/08 16:10:58 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/02/09 14:17:59 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,3 +33,4 @@ void	built_in_pwd(void)
     else
 		perror("getcwd()");
 }
+
