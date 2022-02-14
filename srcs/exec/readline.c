@@ -1,38 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/07 12:56:49 by luffab            #+#    #+#             */
-/*   Updated: 2022/02/14 14:54:49 by fatilly          ###   ########lyon.fr   */
+/*   Created: 2022/02/14 13:11:52 by fatilly           #+#    #+#             */
+/*   Updated: 2022/02/14 13:32:19 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	minishell_loop(void)
+char    *rl_gets(t_shell *s)
 {
-	char	*line_read;
+    s->line_read = readline ("");
 
-	line_read = ft_strdup("");
-	while (line_read)
-	{
-		line_read = readline("$> ");
-		if (ft_strlen(line_read) > 0)
-			add_history(line_read);
-		free(line_read);
-	}
-	printf("\n");
-	return (1);
-}
-
-int	main()
-{
-	/*if (ac > 1)
-		return (1);*/
-	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, SIG_IGN);
-	minishell_loop();
+    if (s->line_read)
+        add_history (s->line_read);
+    return (s->line_read);
 }

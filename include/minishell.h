@@ -6,7 +6,7 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 13:08:39 by luffab            #+#    #+#             */
-/*   Updated: 2022/02/08 16:12:22 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/02/14 14:17:42 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,15 @@
 # include <pwd.h>
 # include <sys/types.h>
 # include "../libft/libft.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 
-#define BUFFER_SIZE 32
+typedef struct  s_shell
+{
+    char    *line_read;
+}               t_shell;
+
+void    sig_handler(int sig);
+int     minishell_loop();
 
 #endif
