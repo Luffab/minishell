@@ -6,7 +6,7 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 12:56:49 by luffab            #+#    #+#             */
-/*   Updated: 2022/02/14 14:54:49 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/02/15 15:01:13 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,17 @@ int	minishell_loop(void)
 		free(line_read);
 	}
 	printf("\n");
+	if (line_read)
+		free(line_read);
 	return (1);
 }
 
-int	main()
+int	main(int ac, char **av, char **env)
 {
-	/*if (ac > 1)
-		return (1);*/
+	if (ac > 1 && !av[1])
+		return (1);
+	t_shell s;
+	take_env(&s, env);
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, SIG_IGN);
 	minishell_loop();

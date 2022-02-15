@@ -6,7 +6,7 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 13:08:39 by luffab            #+#    #+#             */
-/*   Updated: 2022/02/14 14:17:42 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/02/15 15:35:44 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,14 @@
 
 typedef struct  s_shell
 {
-    char    *line_read;
+    char    **m_env;
+    int     env_len;
 }               t_shell;
 
 void    sig_handler(int sig);
 int     minishell_loop();
+void	take_env(t_shell *s, char **env);
+int     strlen_env(char **env);
+char	**realloc_m_env(int size);
 
 #endif

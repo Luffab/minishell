@@ -2,8 +2,8 @@ NAME = minishell
 SRCS =	srcs/exec/main.c \
 		srcs/exec/exec_cmd.c \
 		srcs/exec/built_in.c \
-		srcs/exec/readline.c \
 		srcs/exec/signal.c \
+		srcs/exec/set_env.c \
 
 HEADER = minishell.h
 OBJS = ${SRCS:.c=.o}
