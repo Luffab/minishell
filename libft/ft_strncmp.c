@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   ft_strncmp.c                                     .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fatilly <fatilly@student.le-101.fr>        +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/08 11:56:43 by fatilly      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/14 09:51:06 by fatilly     ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/08 11:56:43 by fatilly           #+#    #+#             */
+/*   Updated: 2022/02/23 13:18:20 by fatilly          ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "libft.h"
 
@@ -20,6 +20,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	unsigned char	*cmp2;
 
 	i = 0;
+	if (!s1 || !s2)
+		return (1);
 	cmp1 = (unsigned char *)s1;
 	cmp2 = (unsigned char *)s2;
 	if (n <= 0)

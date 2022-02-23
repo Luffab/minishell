@@ -6,7 +6,7 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 13:08:39 by luffab            #+#    #+#             */
-/*   Updated: 2022/02/15 15:35:44 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/02/23 13:29:59 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ void    sig_handler(int sig);
 int     minishell_loop();
 void	take_env(t_shell *s, char **env);
 int     strlen_env(char **env);
-char	**realloc_m_env(int size);
+char	**realloc_m_env(int size, t_shell *s);
+void	built_in_pwd(void);
+void    built_in_echo(char **str, int quote, int n);
+void    built_in_cd(char *path);
+void    built_in_env(t_shell *s);
+void    built_in_export(t_shell *s, char *str);
 
 #endif

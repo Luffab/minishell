@@ -6,26 +6,28 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:55:11 by fatilly           #+#    #+#             */
-/*   Updated: 2022/02/15 15:35:28 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/02/23 14:15:29 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**realloc_m_env(int size)
+char	**realloc_m_env(int size, t_shell *s)
 {
 	char	**temp;
 	int		i;
 
-	new = malloc(sizeof(char *) * (size + 1));
-	i = -1;
-	while (s->m_env[++i] && i < size)
+	temp = malloc(sizeof(char *) * (size + 1));
+	i = 0;
+	while (s->m_env[i] && i < size)
 	{
 		temp[i] = ft_strdup(s->m_env[i]);
 		free(s->m_env[i]);
+		i++;
 	}
+	temp[size] = 0;
 	free(s->m_env);
-	return (new);
+	return (temp);
 }
 
 int strlen_env(char **env)

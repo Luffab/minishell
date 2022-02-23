@@ -6,7 +6,7 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 16:01:32 by fatilly           #+#    #+#             */
-/*   Updated: 2022/02/15 15:37:02 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/02/23 14:14:41 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ void	built_in_pwd(void)
 {
 	char    *cwd;
     char    *res;
+    size_t  allocSize;
 
-    cwd = malloc(sizeof(char) * 500);
-    res = getcwd(cwd, sizeof(cwd));
-	if (res != NULL)
+    allocSize = sizeof(char) * 1024;
+    res = (char *)malloc(allocSize);
+    cwd = getcwd(res, allocSize);
+	if (cwd != NULL)
 	       printf("%s\n", cwd);
     else
 		perror("getcwd()");
@@ -43,8 +45,9 @@ void    built_in_export(t_shell *s, char *str)
     len = s->env_len;
     i = 0;
     j = 0;
-    s->m_env = realloc_m_env(len + 1);
+    s->m_env = realloc_m_env(len + 1, s);
     s->m_env[len] = ft_strdup(s->m_env[len - 1]);
+    while (s->m_env[len - 1][j])
     {
         if (str[i] == '\'' || str[i] == '"')
             i++;
@@ -53,4 +56,13 @@ void    built_in_export(t_shell *s, char *str)
         j++;
     }
     s->env_len++;
+}
+
+void    built_in_env(t_shell *s)
+{
+    int i;
+
+    i = -1;
+    while (s->m_env[++i])
+        printf("%s\n", s->m_env[i]);
 }

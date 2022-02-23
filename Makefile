@@ -4,6 +4,7 @@ SRCS =	srcs/exec/main.c \
 		srcs/exec/built_in.c \
 		srcs/exec/signal.c \
 		srcs/exec/set_env.c \
+		srcs/exec/echo.c \
 
 HEADER = minishell.h
 OBJS = ${SRCS:.c=.o}

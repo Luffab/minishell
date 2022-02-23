@@ -6,13 +6,13 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 12:56:49 by luffab            #+#    #+#             */
-/*   Updated: 2022/02/15 15:01:13 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/02/23 13:34:44 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	minishell_loop(void)
+int	minishell_loop(t_shell *s)
 {
 	char	*line_read;
 
@@ -22,6 +22,10 @@ int	minishell_loop(void)
 		line_read = readline("$> ");
 		if (ft_strlen(line_read) > 0)
 			add_history(line_read);
+		if (ft_strncmp("env", line_read, 3) == 0)
+			built_in_env(s);
+		if (ft_strncmp("export", line_read, 6) == 0)
+			built_in_export(s, "TEST=\"42\"");
 		free(line_read);
 	}
 	printf("\n");
@@ -38,5 +42,5 @@ int	main(int ac, char **av, char **env)
 	take_env(&s, env);
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, SIG_IGN);
-	minishell_loop();
+	minishell_loop(&s);
 }
