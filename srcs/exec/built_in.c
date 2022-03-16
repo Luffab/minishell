@@ -6,63 +6,52 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 16:01:32 by fatilly           #+#    #+#             */
-/*   Updated: 2022/02/23 14:14:41 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/03/16 16:02:06 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    built_in_cd(char *path)
+void	built_in_cd(char *path)
 {
-    int res;
+	int		res;
+	char	*user;
+	char	*final_usr;
+	int		ind;
 
-    res = chdir(path);
+	res = 0;
+	ind = search_in_env("USER");
+	while (g_env[ind][res] != '=')
+		res++;
+	user = ft_strdup(g_env[ind] + res + 1);
+	final_usr = ft_strjoin("/Users/", user);
+	if (!path)
+		res = chdir(final_usr);
+	else
+		res = chdir(path);
 	if (res == -1)
 		perror("chdir()");
+	free(user);
+	free(final_usr);
 }
 
 void	built_in_pwd(void)
 {
-	char    *cwd;
-    char    *res;
-    size_t  allocSize;
+	char	*cwd;
+	char	*res;
+	size_t	alloc;
 
-    allocSize = sizeof(char) * 1024;
-    res = (char *)malloc(allocSize);
-    cwd = getcwd(res, allocSize);
+	alloc = sizeof(char) * 1024;
+	res = (char *)malloc(alloc);
+	cwd = getcwd(res, alloc);
 	if (cwd != NULL)
-	       printf("%s\n", cwd);
-    else
+		printf("%s\n", cwd);
+	else
 		perror("getcwd()");
 }
 
-void    built_in_export(t_shell *s, char *str)
+void	built_in_exit(void)
 {
-    int len;
-    int i;
-    int j;
-
-    len = s->env_len;
-    i = 0;
-    j = 0;
-    s->m_env = realloc_m_env(len + 1, s);
-    s->m_env[len] = ft_strdup(s->m_env[len - 1]);
-    while (s->m_env[len - 1][j])
-    {
-        if (str[i] == '\'' || str[i] == '"')
-            i++;
-        s->m_env[len - 1][j] = str[i];
-        i++;
-        j++;
-    }
-    s->env_len++;
-}
-
-void    built_in_env(t_shell *s)
-{
-    int i;
-
-    i = -1;
-    while (s->m_env[++i])
-        printf("%s\n", s->m_env[i]);
+	printf("exit\n");
+	exit(0);
 }

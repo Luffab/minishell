@@ -1,43 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 10:52:56 by fatilly           #+#    #+#             */
-/*   Updated: 2022/03/14 14:03:31 by fatilly          ###   ########lyon.fr   */
+/*   Created: 2022/03/07 14:06:49 by fatilly           #+#    #+#             */
+/*   Updated: 2022/03/14 18:50:58 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*start_len(void)
+int	multi_pipe(t_shell *s)
 {
-	char *str;
+	pid_t	pid;
+	int		pipe_fd[2];
 
-	if (!(str = malloc(1 * sizeof(char))))
-		return (NULL);
-	*str = '\0';
-	return (str);
-}
-
-char	*ft_substr(char *src, int start, int len)
-{
-	int		j;
-	char	*dst;
-
-	j = 0;
-	if (!src)
-		return (NULL);
-	if (!(dst = malloc((len + 1) * sizeof(char))))
-		return (NULL);
-	while (j < len)
+	pipe(pipe_fd);
+	pid = fork();
+	if (pid == 0)
 	{
-		dst[j] = src[start];
-		j++;
-		start++;
+		close(pipe_fd[1]);
+		dup2(pipe_fd[0], STDIN_FILENO);
+		s->in_pipe = pipe_fd[0];
+		s->pid = -1;
+		return (2);
 	}
-	dst[j] = 0;
-	return (dst);
+	else
+	{
+		close(pipe_fd[0]);
+		dup2(pipe_fd[1], STDOUT_FILENO);
+		s->out_pipe = pipe_fd[1];
+		s->pid = pid;
+		return (1);
+	}
+	return (0);
 }

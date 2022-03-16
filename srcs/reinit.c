@@ -1,43 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   reinit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 10:52:56 by fatilly           #+#    #+#             */
-/*   Updated: 2022/03/14 14:03:31 by fatilly          ###   ########lyon.fr   */
+/*   Created: 2022/03/12 16:03:58 by dpuccion          #+#    #+#             */
+/*   Updated: 2022/03/15 18:13:19 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*start_len(void)
+void	reinit_o_chev(t_chev *ch)
 {
-	char *str;
-
-	if (!(str = malloc(1 * sizeof(char))))
-		return (NULL);
-	*str = '\0';
-	return (str);
+	ch->str = NULL;
+	ch->temp = NULL;
+	if (ch->new_line)
+		free (ch->new_line);
 }
 
-char	*ft_substr(char *src, int start, int len)
+void	reinit_ch(t_chev *ch)
 {
-	int		j;
-	char	*dst;
+	ch->temp = NULL;
+	ch->str = NULL;
+}
 
-	j = 0;
-	if (!src)
-		return (NULL);
-	if (!(dst = malloc((len + 1) * sizeof(char))))
-		return (NULL);
-	while (j < len)
-	{
-		dst[j] = src[start];
-		j++;
-		start++;
-	}
-	dst[j] = 0;
-	return (dst);
+void	reinit_ch2(t_chev *ch)
+{
+	if (ch->str)
+		free(ch->str);
+	ch->str = NULL;
 }

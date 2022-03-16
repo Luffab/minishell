@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luffab <luffab@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 13:03:18 by luffab            #+#    #+#             */
-/*   Updated: 2022/02/07 14:13:14 by luffab           ###   ########lyon.fr   */
+/*   Updated: 2022/03/16 15:22:25 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char				*ft_strnstr(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *nptr);
 void				*ft_calloc(size_t nmemb, size_t size);
 char				*ft_strdup(const char *s);
-char				*ft_substr(char const *s, unsigned int start, size_t len);
+char				*ft_substr(char *src, int start, int len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *s, char c);
@@ -58,5 +58,6 @@ void				ft_putnbr_fd(int n, int fd);
 int					get_next_line(int fd, char **line);
 char				*ft_strjoinn(char *s1, char *s2);
 char				*ft_strdup_backline(char *s);
+int					ft_strcmp(const char *s1, const char *s2);
 
 #endif

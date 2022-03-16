@@ -1,43 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   free_tab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 10:52:56 by fatilly           #+#    #+#             */
-/*   Updated: 2022/03/14 14:03:31 by fatilly          ###   ########lyon.fr   */
+/*   Created: 2022/02/25 15:28:28 by dpuccion          #+#    #+#             */
+/*   Updated: 2022/03/15 17:14:47 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*start_len(void)
+void	free_dtab(char **tab)
 {
-	char *str;
+	int	i;
 
-	if (!(str = malloc(1 * sizeof(char))))
-		return (NULL);
-	*str = '\0';
-	return (str);
-}
-
-char	*ft_substr(char *src, int start, int len)
-{
-	int		j;
-	char	*dst;
-
-	j = 0;
-	if (!src)
-		return (NULL);
-	if (!(dst = malloc((len + 1) * sizeof(char))))
-		return (NULL);
-	while (j < len)
+	i = 0;
+	if (tab)
 	{
-		dst[j] = src[start];
-		j++;
-		start++;
+		while (tab[i])
+		{
+			free(tab[i]);
+			i++;
+		}
+		free(tab);
 	}
-	dst[j] = 0;
-	return (dst);
 }
+
+//void	free_ttab(t_shell *s)
+//{
+//	int	i;
+//	int	j;
+//	
+//	i = 0;
+//	while (s->cmd[i])
+//	{
+//		j = 0;
+//		while (s->cmd[i][j])
+//		{
+//			free(s->cmd[i][j])
+//			j++;
+//		}
+//		free (s->cmd[i])
+//		i++;
+//	}
+//	free(s->cmd);
+//}

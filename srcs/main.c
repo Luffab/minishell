@@ -6,7 +6,7 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 12:56:49 by luffab            #+#    #+#             */
-/*   Updated: 2022/02/23 13:34:44 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/03/16 16:23:05 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,24 @@
 int	minishell_loop(t_shell *s)
 {
 	char	*line_read;
+	char	*prompt;
 
 	line_read = ft_strdup("");
 	while (line_read)
 	{
-		line_read = readline("$> ");
+		print_prompt(&prompt);
+		line_read = readline(prompt);
 		if (ft_strlen(line_read) > 0)
+		{
 			add_history(line_read);
-		if (ft_strncmp("env", line_read, 3) == 0)
-			built_in_env(s);
-		if (ft_strncmp("export", line_read, 6) == 0)
-			built_in_export(s, "TEST=\"42\"");
-		free(line_read);
+			parsing(line_read, s);
+		}
+		//free_dtab(s);
+		free(s->tab);
+		//free(line_read);
+		init_var(s);
 	}
-	printf("\n");
+	printf("exit\n");
 	if (line_read)
 		free(line_read);
 	return (1);
@@ -36,11 +40,14 @@ int	minishell_loop(t_shell *s)
 
 int	main(int ac, char **av, char **env)
 {
-	if (ac > 1 && !av[1])
-		return (1);
-	t_shell s;
-	take_env(&s, env);
-	signal(SIGINT, sig_handler);
+	t_shell	s;
+
+	av = NULL;
 	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sig_handler);
+	if (ac > 1)
+		return (1);
+	init_var(&s);
+	take_env(&s, env);
 	minishell_loop(&s);
 }
