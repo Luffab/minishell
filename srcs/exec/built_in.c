@@ -6,13 +6,13 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 16:01:32 by fatilly           #+#    #+#             */
-/*   Updated: 2022/03/16 16:02:06 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 14:10:41 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	built_in_cd(char *path)
+int	built_in_cd(char *path)
 {
 	int		res;
 	char	*user;
@@ -29,13 +29,17 @@ void	built_in_cd(char *path)
 		res = chdir(final_usr);
 	else
 		res = chdir(path);
-	if (res == -1)
-		perror("chdir()");
 	free(user);
 	free(final_usr);
+	if (res == -1)
+	{
+		perror("chdir()");
+		return (1);
+	}
+	return (0);
 }
 
-void	built_in_pwd(void)
+int	built_in_pwd(void)
 {
 	char	*cwd;
 	char	*res;
@@ -47,7 +51,11 @@ void	built_in_pwd(void)
 	if (cwd != NULL)
 		printf("%s\n", cwd);
 	else
+	{
+		return (1);
 		perror("getcwd()");
+	}
+	return (0);
 }
 
 void	built_in_exit(void)

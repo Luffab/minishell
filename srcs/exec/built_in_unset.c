@@ -6,7 +6,7 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:53:30 by fatilly           #+#    #+#             */
-/*   Updated: 2022/03/16 16:54:36 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 14:06:58 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,5 @@ void	built_in_unset(t_shell *s, char **str)
 		g_env = remove_env();
 		s->env_len--;
 	}
+	s->return_status = 0;
 }

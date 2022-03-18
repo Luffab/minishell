@@ -6,7 +6,7 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 14:38:07 by fatilly           #+#    #+#             */
-/*   Updated: 2022/03/16 16:59:00 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 14:34:11 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	shell_exec1(t_shell *s, int i)
 {
 	if (str_is_equ(s->final_cmd[0], "export"))
 	{
-		built_in_export(s);
+		s->return_status = built_in_export(s);
 		i++;
 	}
 	if (str_is_equ(s->final_cmd[0], "unset"))
@@ -26,12 +26,13 @@ int	shell_exec1(t_shell *s, int i)
 	}
 	if (str_is_equ(s->final_cmd[0], "pwd"))
 	{
-		built_in_pwd();
+		s->return_status = built_in_pwd();
 		i++;
 	}
 	if (str_is_equ(s->final_cmd[0], "echo"))
 	{
 		built_in_echo(s->final_cmd);
+		s->return_status = 0;
 		i++;
 	}
 	if (str_is_equ(s->final_cmd[0], "exit"))
@@ -61,15 +62,16 @@ void	shell_exec(t_shell *s)
 	if (str_is_equ(s->final_cmd[0], "env"))
 	{
 		built_in_env();
+		s->return_status = 0;
 		i++;
 	}
 	if (str_is_equ(s->final_cmd[0], "cd"))
 	{
-		built_in_cd(s->final_cmd[1]);
+		s->return_status = built_in_cd(s->final_cmd[1]);
 		i++;
 	}
 	i = shell_exec1(s, i);
-	if (i == 0)
+	if (i == 0 && s->final_cmd[0])
 		exec_cmd(s);
 	reinit_dup(s);
 }

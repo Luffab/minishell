@@ -6,7 +6,7 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 17:02:24 by fatilly           #+#    #+#             */
-/*   Updated: 2022/03/16 16:52:27 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 13:28:07 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,21 @@ void	out_redirect_sc(int fd, char *line, t_shell *s)
 	s->fd_ind++;
 }
 
-void	int_redirect(int fd, char *line, t_shell *s)
+int	int_redirect(int fd, char *line, t_shell *s)
 {
 	s->last_in_fd = fd;
 	if ((!access(line, F_OK)) == 0)
 	{
 		printf("minishell: %s: No such file or directory\n", line);
-		return ;
+		s->return_status = 1;
+		return (0);
 	}
 	s->tempin = open(line, O_RDONLY);
 	s->save_in = dup(STDIN_FILENO);
 	close (STDIN_FILENO);
 	dup2(s->tempin, STDIN_FILENO);
 	s->fd_ind++;
+	return (1);
 }
 
 void	close_fd(int *fd, int nb)

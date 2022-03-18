@@ -6,7 +6,7 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 13:24:36 by dpuccion          #+#    #+#             */
-/*   Updated: 2022/03/15 18:11:31 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 14:56:09 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int	parsing_cmd(t_shell *s)
 	{
 		if (ft_split_cell(s->tab[i], s, &ch) == 0)
 			return (0);
+		if (s->l_dchev > 0)
+			signal(SIGINT, SIG_IGN);
 		shell_exec(s);
 		free_dtab(s->tab_o_chev);
 		if (s->tab[i])

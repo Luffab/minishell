@@ -6,7 +6,7 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 14:11:29 by fatilly           #+#    #+#             */
-/*   Updated: 2022/03/14 18:19:38 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 14:45:28 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,10 @@ void	sig_handler(int sig)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
+}
+
+void	delimit_handler(int sig)
+{
+	if (sig == SIGINT)
+		exit(0) ;
 }

@@ -6,7 +6,7 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 12:56:49 by luffab            #+#    #+#             */
-/*   Updated: 2022/03/16 16:23:05 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 14:49:52 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	minishell_loop(t_shell *s)
 	line_read = ft_strdup("");
 	while (line_read)
 	{
+		signal(SIGINT, sig_handler);
 		print_prompt(&prompt);
 		line_read = readline(prompt);
 		if (ft_strlen(line_read) > 0)
@@ -49,5 +50,6 @@ int	main(int ac, char **av, char **env)
 		return (1);
 	init_var(&s);
 	take_env(&s, env);
+	change_shlvl();
 	minishell_loop(&s);
 }

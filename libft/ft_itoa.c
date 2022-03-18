@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   ft_itoa.c                                        .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fatilly <fatilly@student.le-101.fr>        +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/09 14:55:20 by fatilly      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/16 15:56:18 by fatilly     ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/09 14:55:20 by fatilly           #+#    #+#             */
+/*   Updated: 2022/03/16 17:17:47 by fatilly          ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "libft.h"
 
@@ -38,8 +38,7 @@ static char		*corps(int tmp, char *str, long int nb)
 
 	size = count_size(nb);
 	i = size - 1;
-	if (!(str = (char *)malloc((size + 1) * sizeof(char))))
-		return (NULL);
+	str = (char *)malloc((size + 1) * sizeof(char));
 	if (nb < 0)
 	{
 		str[0] = '-';

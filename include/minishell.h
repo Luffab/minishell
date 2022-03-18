@@ -6,7 +6,7 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 13:08:39 by luffab            #+#    #+#             */
-/*   Updated: 2022/03/16 16:16:05 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 14:43:28 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_shell
 	int		fd_ind;
 	int		in_pipe;
 	int		out_pipe;
-	int		pid;
+	pid_t	pid;
 	int		return_status;
 	int		anc_out;
 	int		anc_in;
@@ -108,11 +108,11 @@ void	int_handler(int sig);
 void	take_env(t_shell *s, char **env);
 int		strlen_env(char **env);
 char	**realloc_m_env(int size);
-void	built_in_pwd(void);
+int		built_in_pwd(void);
 void	built_in_echo(char **str);
-void	built_in_cd(char *path);
+int		built_in_cd(char *path);
 void	built_in_env(void);
-void	built_in_export(t_shell *s);
+int		built_in_export(t_shell *s);
 void	built_in_exit(void);
 void	built_in_unset(t_shell *s, char **str);
 void	in_delimiteur(t_shell *s);
@@ -123,7 +123,7 @@ void	shell_exec(t_shell *s);
 int		in_redirect(t_shell *s);
 void	out_redirect_dc(int fd, char *line, t_shell *s);
 void	out_redirect_sc(int fd, char *line, t_shell *s);
-void	int_redirect(int fd, char *line, t_shell *s);
+int		int_redirect(int fd, char *line, t_shell *s);
 void	exec_cmd(t_shell *s);
 char	*get_path(t_shell *s);
 void	add_backslash(t_shell *s);
@@ -133,6 +133,8 @@ void	close_fd(int *fd, int nb);
 void	init_fd(t_shell *s);
 int		str_is_equ(char *s1, char *s2);
 void	sort_env(void);
+void	change_shlvl(void);
+void	delimit_handler(int sig);
 
 int		check_syntax(char *cell);
 int		parsing(char *line_read, t_shell *s);

@@ -6,7 +6,7 @@
 /*   By: fatilly <fatilly@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 17:27:05 by dpuccion          #+#    #+#             */
-/*   Updated: 2022/03/15 19:14:47 by fatilly          ###   ########lyon.fr   */
+/*   Updated: 2022/03/17 14:19:20 by fatilly          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,5 @@ void	init_var(t_shell *s)
 	s->tab = NULL;
 	s->str = NULL;
 	s->path = NULL;
+	s->pid = 0;
 }
